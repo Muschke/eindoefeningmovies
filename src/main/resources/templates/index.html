@@ -17,7 +17,7 @@
     <nav>
         <ul>
             <li th:each="film:${filmsPerGenre}">
-                <img th:src="@{/images/{id}.jpg(id=*{film.getId()})}"></li>
+                <a th:href="@{/films/{id}(id=*{film.getId()})}"><img th:src="@{/images/{id}.jpg(id=*{film.getId()})}"></a></li>
         </ul>
     </nav>
 </th:block>

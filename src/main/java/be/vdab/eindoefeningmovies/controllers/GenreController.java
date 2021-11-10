@@ -33,4 +33,14 @@ class GenreController {
         modelAndView.addObject("genres", genreService.findAll());
         return modelAndView;
     }
+
+    @GetMapping("/films/{id}")
+    public ModelAndView film (@PathVariable long id) {
+        var modelAndView = new ModelAndView("film");
+        filmService.findById(id)
+                .ifPresent(film -> {
+                    modelAndView.addObject("film", film);
+                });
+        return modelAndView;
+    }
 }

@@ -19,6 +19,9 @@ class JdbcFilmRepository implements FilmRepository{
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final RowMapper<FilmsPerGenre> filmsPerGenreRowMapper = (result, rowNum) ->
             new FilmsPerGenre(result.getLong("id"), result.getLong("genreId"));
+    private final RowMapper<Film> filmRowMapper = (result, rowNum) ->
+            new Film(result.getLong("id"), result.getLong("genreId"), result.getString("titel"), result.getInt("voorraad"),
+                    result.getInt("gereserveerd"), result.getBigDecimal("prijs"));
     public JdbcFilmRepository(JdbcTemplate template) {
         this.template = template;
     }
@@ -29,5 +32,13 @@ class JdbcFilmRepository implements FilmRepository{
         return template.query(sql, filmsPerGenreRowMapper, id);
     }
 
-
+    @Override
+    public Optional<Film> findById(long id) {
+        try {
+            var sql = "select id, genreId, titel, voorraad, gereserveerd, prijs from films where id = ?";
+            return Optional.of(template.queryForObject(sql, filmRowMapper, id));
+        } catch (IncorrectResultSizeDataAccessException ex) {
+            return Optional.empty();
+        }
+    }
 }

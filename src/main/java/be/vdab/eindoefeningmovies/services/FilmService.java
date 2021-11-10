@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface FilmService {
     List<FilmsPerGenre> findAllPerGenre(long id);
+    Optional<Film> findById(long id);
 }

@@ -12,6 +12,9 @@ public class Film {
     @NotNull @PositiveOrZero private final int voorraad;
     private final int gereserveerd;
     @NotNull @Positive @NumberFormat(pattern = "0.00") private final BigDecimal prijs;
+    private boolean beschikbaar = false;
+    private final int beschikbareFilms;
+
 
     public Film(long id, long genreId, String titel, int voorraad, int gereserveerd, BigDecimal prijs) {
         this.id = id;
@@ -20,8 +23,11 @@ public class Film {
         this.voorraad = voorraad;
         this.gereserveerd = gereserveerd;
         this.prijs = prijs;
+        if(voorraadbeschikbaar(this.voorraad, this.gereserveerd)){
+            beschikbaar = true;
+        }
+        this.beschikbareFilms = voorraad - gereserveerd;
     }
-
 
     public long getId() {
         return id;
@@ -45,5 +51,22 @@ public class Film {
 
     public BigDecimal getPrijs() {
         return prijs;
+    }
+
+    public boolean isBeschikbaar() {
+        return beschikbaar;
+    }
+
+    public int getBeschikbareFilms() {
+        return beschikbareFilms;
+    }
+
+    private boolean voorraadbeschikbaar(int voorraad, int gereserveerd) {
+        boolean beschikbaar = false;
+        var actievevoorraad = voorraad - gereserveerd;
+        if(actievevoorraad > 0) {
+            beschikbaar = true;
+        }
+        return beschikbaar;
     }
 }
