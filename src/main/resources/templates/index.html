@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Startpagina genres')"></head>
+<body>
+<a>Genres</a>
+<h1>Genres</h1>
+
+
+<div>
+    <ul>
+        <li th:each="genre:${genres}" th:object="${genre}">
+            <a th:text="${genre}"></a>
+        </li>
+    </ul>
+</div>
+
+
+</body>
+</html>
