@@ -4,7 +4,6 @@
 <body>
 <a th:href="@{/}">Genres</a>
 <a th:href="@{/mandje}">Mandje</a>
-<a th:href="@{/mandje}">Klanten</a>
 <h1>Mandje</h1>
 <th:block th:if="not ${filmsInMandje.isEmpty()}">
     <form th:action="@{/mandje/verwijderen}" method="post">
@@ -20,8 +19,13 @@
             <td th:text="*{{prijs}}"></td>
             <td><input type="checkbox" name="id" th:value="*{id}"></td>
         </tr>
+        <tr>
+            <td>Totaal</td>
+            <td th:text="${totaalMandje}"></td>
+        </tr>
         </tbody>
     </table>
+    </form>
 </th:block>
 
 <div th:if="${filmsInMandje.isEmpty()}">Nog geen films geselecteerd</div>

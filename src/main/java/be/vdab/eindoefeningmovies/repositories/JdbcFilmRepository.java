@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -51,5 +52,16 @@ class JdbcFilmRepository implements FilmRepository{
                 "?,".repeat(ids.size()-1) +
                 "?) order by id";
         return template.query(sql, filmRowMapper, ids.toArray());
+    }
+
+    @Override
+    public BigDecimal vindTotalePrijsByIds(Set<Long> ids) {
+        if(ids.isEmpty()) {
+            return BigDecimal.ZERO;
+        }
+        var sql = "select sum(prijs) from films where id in (" +
+                "?,".repeat(ids.size()-1) +
+                "?)";
+        return template.queryForObject(sql, BigDecimal.class);
     }
 }

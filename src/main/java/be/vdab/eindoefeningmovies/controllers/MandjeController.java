@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.constraints.Positive;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("mandje")
@@ -29,11 +30,13 @@ class MandjeController {
     }
     @GetMapping
     public ModelAndView haalMandje() {
-        return new ModelAndView("mandje", "filmsInMandje", filmService.findByIds(mandje.getIds()));
+        var modelAndView = new ModelAndView("mandje", "filmsInMandje", filmService.findByIds(mandje.getIds()));
+        modelAndView.addObject("totaalMandje", filmService.vindTotalePrijsByIds(mandje.getIds()));
+        return modelAndView;
     }
 
     @PostMapping("verwijderen")
-    public String verwijderFilm(@PathVariable long id) {
+    public String verwijderFilm(long id) {
         mandje.verwijderFilm(id);
         return "redirect:/mandje";
     }

@@ -6,6 +6,7 @@ import be.vdab.eindoefeningmovies.repositories.FilmRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -35,5 +36,11 @@ public class DefaultFilmService implements  FilmService{
     @Transactional(readOnly = true)
     public List<Film> findByIds(Set<Long> ids) {
         return filmRepository.findByIds(ids);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public BigDecimal vindTotalePrijsByIds(Set<Long> ids) {
+        return filmRepository.vindTotalePrijsByIds(ids);
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Component
@@ -16,9 +17,7 @@ public class Mandje implements Serializable {
     public void voegFilmToe(long id) {
         ids.add(id);
     }
-    public void verwijderFilm(long id) {
-        ids.remove(id);
-    }
+    public void verwijderFilm(long id) {ids.remove(id);}
     public Set<Long> getIds() {
         return ids;
     }
