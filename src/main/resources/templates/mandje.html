@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Startpagina genres')"></head>
+<body>
+<a th:href="@{/}">Genres</a>
+<a th:href="@{/mandje}">Mandje</a>
+<a th:href="@{/mandje}">Klanten</a>
+<h1>Mandje</h1>
+<th:block th:if="not ${filmsInMandje.isEmpty()}">
+    <form th:action="@{/mandje/verwijderen}" method="post">
+    <table id="mandjeTabelFilms">
+        <thead>
+        <th>Film</th>
+        <th>Prijs</th>
+        <th><button>Verwijderen</button></th>
+        </thead>
+        <tbody>
+        <tr th:each="film : ${filmsInMandje}" th:object="${film}">
+            <td th:text="*{titel}"></td>
+            <td th:text="*{{prijs}}"></td>
+            <td><input type="checkbox" name="id" th:value="*{id}"></td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+
+<div th:if="${filmsInMandje.isEmpty()}">Nog geen films geselecteerd</div>
+
+</body>
+</html>

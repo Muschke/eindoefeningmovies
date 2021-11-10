@@ -1,40 +1,22 @@
 package be.vdab.eindoefeningmovies.controllers;
 
 import be.vdab.eindoefeningmovies.services.FilmService;
-import be.vdab.eindoefeningmovies.services.GenreService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.math.BigDecimal;
-
 @Controller
-@RequestMapping("/")
-class GenreController {
-    private final GenreService genreService;
+@RequestMapping("films")
+class FilmController {
     private final FilmService filmService;
 
-    GenreController(GenreService genreService, FilmService filmService) {
-        this.genreService = genreService;
+    FilmController(FilmService filmService) {
         this.filmService = filmService;
     }
 
-    @GetMapping
-    public ModelAndView genres() {
-
-        return new ModelAndView("index", "genres", genreService.findAll());
-    }
-
     @GetMapping("{id}")
-    public ModelAndView filmsPerGenre(@PathVariable long id) {
-        var modelAndView = new ModelAndView("index", "filmsPerGenre", filmService.findAllPerGenre(id));
-        modelAndView.addObject("genres", genreService.findAll());
-        return modelAndView;
-    }
-
-    @GetMapping("/films/{id}")
     public ModelAndView film (@PathVariable long id) {
         var modelAndView = new ModelAndView("film");
         filmService.findById(id)
@@ -43,4 +25,5 @@ class GenreController {
                 });
         return modelAndView;
     }
+
 }
