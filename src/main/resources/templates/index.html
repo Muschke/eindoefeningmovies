@@ -2,17 +2,27 @@
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments::head(title='Startpagina genres')"></head>
 <body>
-<a>Genres</a>
+<a th:href="@{/}">Genres</a>
 <h1>Genres</h1>
 
 
-<div>
+<nav>
     <ul>
         <li th:each="genre:${genres}" th:object="${genre}">
-            <a th:text="${genre}"></a>
+            <a th:href="@{/{id}(id=${genre.id})}" th:text="*{genreNaam}"></a>
         </li>
+</nav>
+
+<th:block th:if="${filmsPerGenre}">
+    <nav>
+        <ul>
+            <li th:each="film:${filmsPerGenre}">
+                <img th:src="@{/images/{id}.jpg(id=*{film.getId()})}"></li>
+        </ul>
+    </nav>
+</th:block>
+
     </ul>
-</div>
 
 
 </body>

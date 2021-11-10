@@ -1,0 +1,13 @@
+
+/*navigatie als rij onder titel*/
+nav ul {
+    padding: 1em 0;
+}
+
+nav li {
+    display: inline;
+}
+
+nav li a {
+    vertical-align: middle;
+}

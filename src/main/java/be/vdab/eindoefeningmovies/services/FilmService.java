@@ -1,10 +1,9 @@
-package be.vdab.eindoefeningmovies.repositories;
-
+package be.vdab.eindoefeningmovies.services;
 import be.vdab.eindoefeningmovies.domain.Film;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface FilmRepository {
+public interface FilmService {
     List<Film> findAllPerGenre(long id);
 }
