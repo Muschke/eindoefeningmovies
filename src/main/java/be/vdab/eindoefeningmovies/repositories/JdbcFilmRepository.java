@@ -24,6 +24,8 @@ class JdbcFilmRepository implements FilmRepository{
     private final RowMapper<Film> filmRowMapper = (result, rowNum) ->
             new Film(result.getLong("id"), result.getLong("genreId"), result.getString("titel"), result.getInt("voorraad"),
                     result.getInt("gereserveerd"), result.getBigDecimal("prijs"));
+
+
     public JdbcFilmRepository(JdbcTemplate template) {
         this.template = template;
     }
@@ -56,12 +58,9 @@ class JdbcFilmRepository implements FilmRepository{
 
     @Override
     public BigDecimal vindTotalePrijsByIds(Set<Long> ids) {
-        if(ids.isEmpty()) {
-            return BigDecimal.ZERO;
-        }
         var sql = "select sum(prijs) from films where id in (" +
                 "?,".repeat(ids.size()-1) +
                 "?)";
-        return template.queryForObject(sql, BigDecimal.class);
+        return template.queryForObject(sql, BigDecimal.class, ids);
     }
 }

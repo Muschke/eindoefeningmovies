@@ -48,6 +48,12 @@ class JdbcFilmRepositoryTest extends AbstractTransactionalJUnit4SpringContextTes
                 .containsOnly(idEen, idTwee)
                 .isSorted();
     }
+    @Test
+    void findtotaleprijsbyids() {
+        long idEen = idVanTestFilm();
+        long idTwee = idVanTestFilmTwee();
+        assertThat(filmRepository.vindTotalePrijsByIds(Set.of(idTwee, idEen))).isEqualByComparingTo(BigDecimal.TEN);
+    }
 
     @Test
     void legeVerzamelingGeeftLegeSet() {

@@ -1,2 +1,2 @@
-insert into films (genreId, titel, voorraad, gereserveerd, prijs) values (8, 'testFilm', 5, 0, 3.00),
-                                                                         (8, 'testFilmTwee', 5, 0, 3.00);
+insert into films (genreId, titel, voorraad, gereserveerd, prijs) values (8, 'testFilm', 5, 0, 5.00),
+                                                                         (8, 'testFilmTwee', 5, 0, 5.00);
