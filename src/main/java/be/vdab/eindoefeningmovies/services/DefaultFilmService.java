@@ -1,5 +1,6 @@
 package be.vdab.eindoefeningmovies.services;
 
+import be.vdab.eindoefeningmovies.DTO.FilmsPerGenre;
 import be.vdab.eindoefeningmovies.domain.Film;
 import be.vdab.eindoefeningmovies.repositories.FilmRepository;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class DefaultFilmService implements  FilmService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<Film> findAllPerGenre(long id) {
+    public List<FilmsPerGenre> findAllPerGenre(long id) {
         return filmRepository.findAllPerGenre(id);
     }
 }
