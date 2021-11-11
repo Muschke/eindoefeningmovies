@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments::head(title='Startpagina genres')"></head>
+<head th:replace="fragments::head(title='Mandje')"></head>
 <body>
 <a th:href="@{/}">Genres</a>
 <a th:href="@{/mandje}">Mandje</a>
+<a th:href="@{/klanten}">Klanten</a>
 <h1>Mandje</h1>
 <th:block th:if="not ${filmsInMandje.isEmpty()}">
     <form th:action="@{/mandje/verwijderen}" method="post">
