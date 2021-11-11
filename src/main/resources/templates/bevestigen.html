@@ -6,7 +6,7 @@
 <a th:href="@{/mandje}">Mandje</a>
 <a th:href="@{/klanten}">Klanten</a>
 <h1>Bevestigen</h1>
-<h4>film(s) bevestigen voor<span th:text="|${klant.voornaam} ${klant.familienaam}|"></span></h4>
+<h4><span th:text="${filmsInMandje}"></span> film(s) bevestigen voor <span th:text="|${klant.voornaam} ${klant.familienaam}|"></span></h4>
 <button>Bevestigen</button>
 </body>
 </html>

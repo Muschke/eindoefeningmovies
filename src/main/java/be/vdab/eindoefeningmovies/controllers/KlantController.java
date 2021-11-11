@@ -1,7 +1,9 @@
 package be.vdab.eindoefeningmovies.controllers;
 
 import be.vdab.eindoefeningmovies.forms.vindNaamAdhvLettersForm;
+import be.vdab.eindoefeningmovies.services.FilmService;
 import be.vdab.eindoefeningmovies.services.KlantService;
+import be.vdab.eindoefeningmovies.sessions.Mandje;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("klanten")
 class KlantController {
     private final KlantService klantService;
+    private final FilmService filmService;
+    private final Mandje mandje;
 
-    KlantController(KlantService klantService) {
+    KlantController(KlantService klantService, FilmService filmService, Mandje mandje) {
         this.klantService = klantService;
+        this.filmService = filmService;
+        this.mandje = mandje;
     }
+
 
     //form in de pagina steken
     @GetMapping("/form")
@@ -41,17 +48,9 @@ class KlantController {
                 .ifPresent(klant -> {
                     modelAndView.addObject("klant", klant);
                 });
+        modelAndView.addObject("filmsInMandje", mandje.telAantalFilms());
         return modelAndView;
-
-        //maak methode om klantnaam te vinden adhv id, voeg test in
-        //mandje gaan we ook moeten ophalen op de één of andere manier
-        //    public ModelAndView film (@PathVariable long id) {
-        //        var modelAndView = new ModelAndView("film");
-        //        filmService.findById(id)
-        //                .ifPresent(film -> {
-        //                    modelAndView.addObject("film", film);
-        //                });
-        //        return modelAndView;
     }
+
 
 }

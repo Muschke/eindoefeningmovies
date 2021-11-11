@@ -21,4 +21,8 @@ public class Mandje implements Serializable {
     public Set<Long> getIds() {
         return ids;
     }
+    public int telAantalFilms() {
+        var aantal = ids.size();
+        return aantal;
+    }
 }
