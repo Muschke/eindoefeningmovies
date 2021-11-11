@@ -5,6 +5,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 
@@ -20,6 +22,6 @@ class JdbcReservatieRepository implements ReservatieRepository{
 
     @Override
     public void create(Reservatie reservatie) {
-        insert.execute(Map.of("klantId", reservatie.getKlantid(), "filmId", reservatie.getFilmId(),"reservatie", reservatie.getDate()));
+        insert.execute(Map.of("klantId", reservatie.getKlantid(), "filmId", reservatie.getFilmId(),"reservatie", LocalDateTime.now()));
     }
 }

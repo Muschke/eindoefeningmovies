@@ -4,26 +4,29 @@ import be.vdab.eindoefeningmovies.domain.Reservatie;
 import be.vdab.eindoefeningmovies.forms.vindNaamAdhvLettersForm;
 import be.vdab.eindoefeningmovies.services.FilmService;
 import be.vdab.eindoefeningmovies.services.KlantService;
+import be.vdab.eindoefeningmovies.services.ReservatieService;
 import be.vdab.eindoefeningmovies.sessions.Mandje;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("klanten")
 class KlantController {
     private final KlantService klantService;
     private final FilmService filmService;
+    private final ReservatieService reservatieService;
     private final Mandje mandje;
 
-    KlantController(KlantService klantService, FilmService filmService, Mandje mandje) {
+    KlantController(KlantService klantService, FilmService filmService, ReservatieService reservatieService, Mandje mandje) {
         this.klantService = klantService;
         this.filmService = filmService;
+        this.reservatieService = reservatieService;
         this.mandje = mandje;
     }
 
@@ -57,7 +60,15 @@ class KlantController {
     }
     @GetMapping("/bevestigen/{id}/form")
     public ModelAndView toevoegenReservatie(){
-        return new ModelAndView("bevestigen/{id}").addObject(new Reservatie(0, 0, LocalDate.now()));
+        return new ModelAndView("bevestigen/{id}").addObject(new Reservatie(0, 0, LocalDateTime.now()));
     }
 
+    @PostMapping("/bevestigen/verwerken")
+        public String toevoegenEnUpdaten(@Valid Reservatie reservatie, Errors errors) {
+       /* if(errors.hasErrors()){
+            return "/klanten/bevestigen/{id}";
+        }*/
+        reservatieService.updateAndCreate(reservatie);
+        return "redirect:/rapport";
+    }
 }

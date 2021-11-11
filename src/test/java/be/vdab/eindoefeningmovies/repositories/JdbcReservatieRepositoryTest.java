@@ -8,6 +8,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -24,7 +25,7 @@ class JdbcReservatieRepositoryTest extends AbstractTransactionalJUnit4SpringCont
     }
     @Test
     void create() {
-        reservatieRepository.create(new Reservatie(2,2, LocalDate.now()));
+        reservatieRepository.create(new Reservatie(2,2, LocalDateTime.now()));
         assertThat(countRowsInTable(RESERVATIES))
                 .isEqualTo(4);
 
