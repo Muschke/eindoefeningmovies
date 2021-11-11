@@ -6,7 +6,17 @@
 <a th:href="@{/mandje}">Mandje</a>
 <a th:href="@{/klanten}">Klanten</a>
 <h1>Bevestigen</h1>
+
+<form method="post" th:action="@{/klanten/bevestigen/{id}}">
 <h4><span th:text="${filmsInMandje}"></span> film(s) bevestigen voor <span th:text="|${klant.voornaam} ${klant.familienaam}|"></span></h4>
+
+    <input type="hidden" id="klantid" th:value="${klant.id}">
+    <input type="hidden" id="filmid" th:value="${filmIds}">
+    <input type="hidden" id="datetime" value="0">
+
 <button>Bevestigen</button>
+
+</form>
+
 </body>
 </html>

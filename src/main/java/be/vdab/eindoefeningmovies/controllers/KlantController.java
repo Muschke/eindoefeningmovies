@@ -1,5 +1,6 @@
 package be.vdab.eindoefeningmovies.controllers;
 
+import be.vdab.eindoefeningmovies.domain.Reservatie;
 import be.vdab.eindoefeningmovies.forms.vindNaamAdhvLettersForm;
 import be.vdab.eindoefeningmovies.services.FilmService;
 import be.vdab.eindoefeningmovies.services.KlantService;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("klanten")
@@ -49,8 +52,12 @@ class KlantController {
                     modelAndView.addObject("klant", klant);
                 });
         modelAndView.addObject("filmsInMandje", mandje.telAantalFilms());
+        modelAndView.addObject("filmIds", mandje.getIds());
         return modelAndView;
     }
-
+    @GetMapping("/bevestigen/{id}/form")
+    public ModelAndView toevoegenReservatie(){
+        return new ModelAndView("bevestigen/{id}").addObject(new Reservatie(0, 0, LocalDate.now()));
+    }
 
 }

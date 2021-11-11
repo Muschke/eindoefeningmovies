@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 
 @JdbcTest
 @Import(JdbcFilmRepository.class)
@@ -64,6 +65,13 @@ class JdbcFilmRepositoryTest extends AbstractTransactionalJUnit4SpringContextTes
         assertThat(filmRepository.findByIds(Set.of(-7L, -8L))).isEmpty();
     }
 
+    @Test
+    void update(){
+        var id = idVanTestFilm();
+        filmRepository.update(id);
+        assertThat(filmRepository.findById(id))
+                .hasValueSatisfying(film -> assertThat(film.getGereserveerd()).isOne());
+    }
     private long idVanTestFilm() {
         return jdbcTemplate.queryForObject("select id from films where titel = 'testFilm'", long.class);
     }
