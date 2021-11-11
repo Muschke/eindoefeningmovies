@@ -21,7 +21,7 @@
             <th>Gemeente</th>
         </thead>
         <tr th:each="klant:${klantenMetStartletters}" th:object="${klant}">
-            <td th:text="|*{familienaam} *{voornaam}|"></td>
+            <td><a th:href="@{/klanten/bevestigen/{id}(id=${klant.id})}" th:text="|*{familienaam} *{voornaam}|"></a></td>
             <td th:text="*{straatNummer}"></td>
             <td th:text="*{postcode}"></td>
             <td th:text="*{gemeente}"></td>

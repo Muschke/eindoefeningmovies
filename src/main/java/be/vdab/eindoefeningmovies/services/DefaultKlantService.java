@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -19,6 +20,12 @@ class DefaultKlantService implements KlantService{
     @Override
     @Transactional(readOnly = true)
     public List<Klant> findByBevatLetters(String letters) {
-        return null;
+        return klantRepository.findByBevatLetters(letters);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Klant> findById(long id) {
+        return klantRepository.findById(id);
     }
 }

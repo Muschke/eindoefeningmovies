@@ -19,7 +19,7 @@ public class DataSourceTest {
     @Test
     void getConnection()throws SQLException {
         try (var connection = dataSource.getConnection()) {
-            assertThat(connection.getCatalog()).isEqualTo("vdab_testMovies");
+            assertThat(connection.getCatalog()).isEqualTo("movies");
         }
     }
 }
