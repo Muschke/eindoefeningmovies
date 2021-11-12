@@ -60,7 +60,7 @@ class KlantController {
     }
     @GetMapping("/bevestigen/{id}/form")
     public ModelAndView toevoegenReservatie(){
-        return new ModelAndView("bevestigen/{id}").addObject(new Reservatie(0, 0, LocalDateTime.now()));
+        return new ModelAndView("bevestigen").addObject(new Reservatie(0, 0, LocalDateTime.now()));
     }
 
     @PostMapping("/bevestigen/verwerken")
